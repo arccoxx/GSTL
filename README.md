@@ -1,4 +1,3 @@
-
 # Generalized Statistical Thermodynamic Learning (GSTL)
 ## Core Framework Theory Manual, v2.66 Consolidated Edition
 
@@ -15,6 +14,9 @@ It deliberately focuses on the **general GSTL theory**, not on any one implement
 ## 0. Executive Orientation
 
 GSTL stands for **Generalized Statistical Thermodynamic Learning**.
+
+> **GitHub rendering note.** All display equations are written as standalone `$$ ... $$` blocks and raw comparison signs inside math-heavy expressions are written with LaTeX commands such as `\lt` and `\gt` where needed.
+
 
 The central thesis is:
 
@@ -373,7 +375,7 @@ $$
 
 Properties:
 
-1. $0<\mathrm{CV}_G(z)\le1$.
+1. $0 \lt \mathrm{CV}_G(z)\le 1$.
 2. $\mathrm{CV}_G(z)=1$ iff $R_G(z)=0$.
 3. $R_G(z_1)\le R_G(z_2)$ iff $\mathrm{CV}_G(z_1)\ge \mathrm{CV}_G(z_2)$.
 
@@ -650,7 +652,7 @@ where $d_{ij}$ is a metric on assignments over the overlap $U_i\cap U_j$. The sh
 $$
 R_{\mathrm{glue}}(\{s_i\})
 :=
-\sum_{i<j:\,U_i\cap U_j\neq\emptyset}
+\sum_{\substack{i \lt j \\ U_i\cap U_j\neq\emptyset}}
 a_{ij}R_{ij}(s_i,s_j),
 \qquad a_{ij}\ge0.
 $$
@@ -897,7 +899,7 @@ For sequences:
 $$
 z=(x,y),
 \qquad
-q_\theta(y\mid x)=\prod_t q_\theta(y_t\mid x,y_{<t}).
+q_\theta(y\mid x)=\prod_t q_\theta(y_t\mid x,y_{\lt t}).
 $$
 
 ### 11.2 Candidate coverage
@@ -950,7 +952,7 @@ $$
 likelihood is:
 
 $$
-\log q_\theta(y\mid x)=\sum_{t=1}^T\log q_\theta(y_t\mid x,y_{<t}).
+\log q_\theta(y\mid x)=\sum_{t=1}^T\log q_\theta(y_t\mid x,y_{\lt t}).
 $$
 
 ### 12.2 GSTL sequence score
@@ -986,7 +988,7 @@ For hard validity constraints:
 $$
 y^*_{\mathrm{lex}}
 =
-\mathrm{lexmax}_{y\in\mathcal C_\theta(x)}
+\arg\max_{y\in\mathcal C_\theta(x)}^{\mathrm{lex}}
 \left(
 \mathbf 1[R_G(x,y)\le \tau_R],
 -R_G(x,y),
@@ -1140,7 +1142,7 @@ $$
 It is successful if:
 
 $$
-R_G(\rho(z))<R_G(z).
+R_G(\rho(z)) \lt R_G(z).
 $$
 
 A learned repair generator produces:
@@ -1163,7 +1165,7 @@ $$
 A prefix state is:
 
 $$
-s_t=(x,y_{<t}).
+s_t=(x,y_{\lt t}).
 $$
 
 Likelihood token:
@@ -1185,7 +1187,7 @@ $$
 Jump inference is triggered when:
 
 $$
-R_G(s_t,y_t^{\mathrm{MLE}})>\tau_R
+R_G(s_t,y_t^{\mathrm{MLE}}) \gt \tau_R
 $$
 
 or when validity gain exceeds likelihood loss.
@@ -1292,7 +1294,7 @@ $$
 Adversarial risk:
 
 $$
-A_G(q_\theta,\psi)=\sup_{z:v(z)=0,q_\theta(z)>0}\widehat{\mathrm{CV}}_\psi(z).
+A_G(q_\theta,\psi)=\sup_{z:v(z)=0,q_\theta(z) \gt 0}\widehat{\mathrm{CV}}_\psi(z).
 $$
 
 Firewall:
@@ -1362,13 +1364,13 @@ If a spoof fools only a strict subset of critics, then disagreement is nonzero a
 Suppose $c_i(z)$ is high for some critics and low for at least one critic. Then:
 
 $$
-c_{\min}(z)<\tau_{\min}
+c_{\min}(z) \lt \tau_{\min}
 $$
 
 for appropriate $\tau_{\min}$, or:
 
 $$
-\sigma_E(z)>\tau_\sigma
+\sigma_E(z) \gt \tau_\sigma
 $$
 
 for appropriate $\tau_\sigma$. Thus the certificate fails.
@@ -1399,10 +1401,10 @@ $$
 
 $$
 \pi(z)=
-\begin{cases}
-\pi_d(z),& d_\eta(z)\ge\tau_d,\ u_\eta(z)\le\tau_u,\\
-\pi_E(z),&\text{otherwise.}
-\end{cases}
+\begin{aligned}
+\pi_d(z) &\quad \text{if } d_\eta(z)\ge\tau_d \text{ and } u_\eta(z)\le\tau_u,\\
+\pi_E(z) &\quad \text{otherwise.}
+\end{aligned}
 $$
 
 ### 18.3 Cascaded certification
@@ -1457,10 +1459,10 @@ $$
 C_{\mathrm{cas}}=\sum_k c_k|B_k|.
 $$
 
-Since $B_k\subseteq B$ for all $k$, $|B_k|\le |B|$. If at least one early stop occurs, then for some later $k$, $|B_k|<|B|$. With positive costs:
+Since $B_k\subseteq B$ for all $k$, $|B_k|\le |B|$. If at least one early stop occurs, then for some later $k$, $|B_k| \lt |B|$. With positive costs:
 
 $$
-C_{\mathrm{cas}}<C_{\mathrm{full}}.
+C_{\mathrm{cas}} \lt C_{\mathrm{full}}.
 $$
 
 ---
@@ -1561,7 +1563,7 @@ $$
 A policy is safely better only if:
 
 $$
-V^-_{\mathrm{new}}(\Gamma)>V^+_{\mathrm{old}}(\Gamma).
+V^-_{\mathrm{new}}(\Gamma) \gt V^+_{\mathrm{old}}(\Gamma).
 $$
 
 ---
